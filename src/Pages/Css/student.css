@@ -1,0 +1,36 @@
+.sidebar {
+    width: 200px;
+    height: 100vh;
+  }
+  
+  .content {
+    background-color: #f8f9fa;
+    min-height: 100vh;
+  }
+  
+
+
+  .google-signin-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4285F4; /* Google Blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.google-signin-button:hover {
+    background-color: #357ae8; /* Darker blue on hover */
+}
+
+.google-icon {
+    width: 20px; /* Adjust icon size */
+    height: 20px; /* Adjust icon size */
+    margin-right: 10px; /* Spacing between icon and text */
+}

@@ -1,24 +1,41 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+import SelectLogin from './Pages/SelectLogin';
+import Login from './Pages/Login';
+import StudentCompanies from './Pages/StudentCompanies';
+import StudentRegistration from './Pages/StudentRegistration';
+import StudentResults from './Pages/StudentResults';
+
+
+import Admin from './Pages/Admin';
+
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <Router basename='/placementportal'>
+    <Routes>
+      <Route path="/selectlogin" element={<SelectLogin />} />
+      <Route path="/login" element={<Login />} />
+
+      
+      <Route path="/studentreg" element={<StudentRegistration />} />
+      <Route path="/studentcom" element={<StudentCompanies />} />
+      <Route path="/studentres" element={<StudentResults />} />
+
+      <Route path="/admin" element={<Admin />} />
+      
+      <Route path="*" element={<Navigate to="/login" />} />
+    </Routes>
+  </Router>
+
+   
+    
   );
 }
 
