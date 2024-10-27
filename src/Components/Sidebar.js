@@ -16,11 +16,11 @@ function Sidebar() {
             Companies
           </NavLink>
         </li>
-        <li className="nav-item">
+        {/* <li className="nav-item">
           <NavLink className="nav-link text-white" to="/studentres">
             Results
           </NavLink>
-        </li>
+        </li> */}
       </ul>
     </div>
   );

@@ -5,7 +5,7 @@ import "./Css/StudentCompanies.css"; // Assuming you have CSS for styling
 
 const StudentCompaniesReg = () => {
   const [companies, setCompanies] = useState([]);
-  const [email, setEmail] = useState(""); // Corrected from emsil to email
+  const [email, setEmail] = useState(""); 
   const [studentCgpa, setStudentCgpa] = useState(0);
   const [filteredCompanies, setFilteredCompanies] = useState([]);
   const [registeredCompanies, setRegisteredCompanies] = useState(new Set());
@@ -49,7 +49,7 @@ const StudentCompaniesReg = () => {
     }
 
     // Define the path for storing student registrations
-    const regRef = ref(database, `students/companies/${companyId}/${email}`);
+    const regRef = ref(database, `companies/${companyId}/register/${email}`);
     set(regRef, { cgpa: studentCgpa }) // Store CGPA along with email
       .then(() => {
         setRegisteredCompanies((prev) => new Set(prev).add(companyId));
@@ -58,7 +58,7 @@ const StudentCompaniesReg = () => {
   };
 
   const unregisterCompany = (companyId) => {
-    const regRef = ref(database, `students/companies/${companyId}/${email}`);
+    const regRef = ref(database, `companies/${companyId}/register/${email}`);
     remove(regRef)
       .then(() => {
         setRegisteredCompanies((prev) => {
@@ -71,27 +71,24 @@ const StudentCompaniesReg = () => {
   };
 
   useEffect(() => {
-    const registeredRef = ref(database, `students/companies/`);
+    const registeredRef = ref(database, `companies/`);
     onValue(registeredRef, (snapshot) => {
       const data = snapshot.val();
       const registeredList = data ? Object.keys(data).flatMap(companyId => {
-        return Object.keys(data[companyId]); // List of emails for each company
+        // Check if the email exists in the registration list of the company
+        return Object.keys(data[companyId]?.register || {}).filter(emailKey => 
+          emailKey === email
+        ).map(() => companyId);
       }) : [];
       setRegisteredCompanies(new Set(registeredList));
     });
-  }, []);
+  }, [email]); // Ensure this runs whenever the email changes
 
   return (
     <div className="student-companies">
       <h3>Available Companies for You</h3>
-      <input
-        type="number"
-        placeholder="Enter your CGPA"
-        value={studentCgpa}
-        onChange={handleCgpaChange}
-        step="0.1"
-        className="cgpa-input"
-      />
+   
+      <p>CGPA : {studentCgpa}</p>
 
       <h4>Your Registered Companies</h4>
       <div className="registered-companies">

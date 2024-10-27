@@ -1,0 +1,53 @@
+/* CompaniesAndStudents.css */
+
+.container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 2em;
+    color: #333;
+  }
+  
+  .loading {
+    text-align: center;
+    font-size: 1.5em;
+    color: #555;
+  }
+  
+  .company-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .company-name {
+    color: #0073e6;
+    margin: 0;
+    font-size: 1.5em;
+  }
+  
+  .student-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .student-item {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .student-item:last-child {
+    border-bottom: none;
+  }
+  
+  strong {
+    color: #444;
+  }
+  

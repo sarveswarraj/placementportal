@@ -21,11 +21,11 @@ function AdminSidebar() {
             Rgistered Students
           </NavLink>
         </li>
-        <li className="nav-item">
+        {/* <li className="nav-item">
           <NavLink className="nav-link text-white" to="/adminupload">
             Upload Results
           </NavLink>
-          </li>
+          </li> */}
       </ul>
     </div>
   );

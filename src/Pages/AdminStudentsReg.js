@@ -1,5 +1,5 @@
 import AdminSidebar from "../Components/AdminSidebar";
-
+import CompaniesAndStudents from "./CompaniesAndStudents";
 
 function AdminStudentReg() {
     return (
@@ -7,7 +7,7 @@ function AdminStudentReg() {
         <div className="d-flex">
         <AdminSidebar />
         <div className="content p-4 flex-grow-1">
-          {/* <ManageCompanies/> */}
+          <CompaniesAndStudents/>
         </div>
       </div>
 
