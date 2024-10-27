@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/t%20https://sarveswarraj.github.io/placementportal/static/css/main.7505f152.css",
-    "main.js": "/t%20https://sarveswarraj.github.io/placementportal/static/js/main.b92a0691.js",
-    "static/js/453.61279ac7.chunk.js": "/t%20https://sarveswarraj.github.io/placementportal/static/js/453.61279ac7.chunk.js",
-    "index.html": "/t%20https://sarveswarraj.github.io/placementportal/index.html",
-    "static/media/google.svg": "/t%20https://sarveswarraj.github.io/placementportal/static/media/google.9a7800d06783d80a1c12249a8ca58e9d.svg",
-    "main.7505f152.css.map": "/t%20https://sarveswarraj.github.io/placementportal/static/css/main.7505f152.css.map",
-    "main.b92a0691.js.map": "/t%20https://sarveswarraj.github.io/placementportal/static/js/main.b92a0691.js.map",
-    "453.61279ac7.chunk.js.map": "/t%20https://sarveswarraj.github.io/placementportal/static/js/453.61279ac7.chunk.js.map"
+    "main.css": "/placementportal/static/css/main.7505f152.css",
+    "main.js": "/placementportal/static/js/main.d729a7a2.js",
+    "static/js/453.61279ac7.chunk.js": "/placementportal/static/js/453.61279ac7.chunk.js",
+    "static/media/google.svg": "/placementportal/static/media/google.9a7800d06783d80a1c12249a8ca58e9d.svg",
+    "index.html": "/placementportal/index.html",
+    "main.7505f152.css.map": "/placementportal/static/css/main.7505f152.css.map",
+    "main.d729a7a2.js.map": "/placementportal/static/js/main.d729a7a2.js.map",
+    "453.61279ac7.chunk.js.map": "/placementportal/static/js/453.61279ac7.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7505f152.css",
-    "static/js/main.b92a0691.js"
+    "static/js/main.d729a7a2.js"
   ]
 }
