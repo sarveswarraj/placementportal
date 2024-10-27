@@ -1,15 +1,15 @@
-
-
 // src/SelectLogin.js
 import React from 'react';
-// import './Css/styles.css';
 import { useNavigate } from 'react-router-dom';
+// import './Css/styles.css'; // Uncomment if styles are needed
 
 function SelectLogin() {
     const navigate = useNavigate();
 
     const handleRoleSelection = (role) => {
-        navigate('/login', { state: { role } });
+        // Navigate based on the selected role
+        const route = role === "admin" ? "/adminlogin" : "/login";
+        navigate(route);
     };
 
     return (

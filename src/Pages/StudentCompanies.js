@@ -1,6 +1,6 @@
 import React from 'react';
 import Sidebar from '../Components/Sidebar';
-import RegistrationForm from '../Components/RegistrationForm';
+import StudentCompaniesReg from './StudentCompaniesReg';
 import './Css/student.css';
 
 function StudentCompanies() {
@@ -8,8 +8,9 @@ function StudentCompanies() {
     <div className="d-flex">
       <Sidebar />
       <div className="content p-4 flex-grow-1">
-        <p>companies</p>
-        {/* <RegistrationForm /> */}
+
+        <StudentCompaniesReg/>
+        
       </div>
     </div>
   );

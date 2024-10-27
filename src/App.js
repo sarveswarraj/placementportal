@@ -11,8 +11,12 @@ import StudentCompanies from './Pages/StudentCompanies';
 import StudentRegistration from './Pages/StudentRegistration';
 import StudentResults from './Pages/StudentResults';
 
-
 import Admin from './Pages/Admin';
+import AdminLogin from './Pages/AdminLogin';
+import AdminStudentReg from './Pages/AdminStudentsReg';
+import AdminUpload from './Pages/AdminUpload';
+
+
 
 function App() {
 
@@ -29,8 +33,11 @@ function App() {
       <Route path="/studentres" element={<StudentResults />} />
 
       <Route path="/admin" element={<Admin />} />
+      <Route path="/adminupload" element={<AdminUpload />} />
+      <Route path="/adminreg" element={<AdminStudentReg />} />
+      <Route path="/adminlogin" element={<AdminLogin />} />
       
-      <Route path="*" element={<Navigate to="/login" />} />
+      <Route path="*" element={<Navigate to="/selectlogin" />} />
     </Routes>
   </Router>
 

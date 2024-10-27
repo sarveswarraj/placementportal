@@ -1,10 +1,8 @@
-// src/Components/RegistrationForm.js
-
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { auth, database } from '../firebaseConfig'; // Adjust the import path if necessary
-import { ref, set, get } from 'firebase/database'; // Import required Firebase Database functions
+import { ref, set, get } from 'firebase/database';
 
 function RegistrationForm() {
     const navigate = useNavigate();
@@ -18,25 +16,29 @@ function RegistrationForm() {
         resume: null,
         skills: '',
     });
-    const [isRegistered, setIsRegistered] = useState(false); // Track if the user is already registered
+    const [isRegistered, setIsRegistered] = useState(false);
 
-    // Check for mailData in local storage when the component mounts
     useEffect(() => {
         const mailData = localStorage.getItem('user');
         if (!mailData) {
-            // Redirect to login page if mailData is null
-            navigate('/login'); // Adjust the path as needed
-            return; // Exit the effect if no user is found
+            navigate('/login'); // Redirect to login page if mailData is null
+            return;
         }
 
-        // Fetch user data from Realtime Database
-        const userId = auth.currentUser.uid; // Get current user's UID
+        if (!auth.currentUser) {
+            console.warn('User not authenticated');
+            navigate('/login'); // Redirect to login page if not authenticated
+            return;
+        }
+
+        const userId = auth.currentUser.uid;
         const userRef = ref(database, `users/${userId}`);
         get(userRef)
             .then((snapshot) => {
                 if (snapshot.exists()) {
-                    setFormData(snapshot.val()); // Populate form with existing data
-                    setIsRegistered(true); // Set registered status to true
+                    setFormData(snapshot.val());
+                    localStorage.setItem("mycgpa", snapshot.val().cgpa);
+                    setIsRegistered(true);
                 }
             })
             .catch((error) => {
@@ -55,20 +57,23 @@ function RegistrationForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const userId = auth.currentUser.uid; // Get current user's UID
+        if (!auth.currentUser) {
+            console.warn('User not authenticated');
+            navigate('/login');
+            return;
+        }
 
-        // Save user data to Realtime Database
+        const userId = auth.currentUser.uid;
         const userRef = ref(database, `users/${userId}`);
         await set(userRef, formData)
             .then(() => {
                 console.log('User data saved successfully!');
-                navigate('/studentresults'); // Redirect to student results or another page
+                navigate('/studentresults');
             })
             .catch((error) => {
                 console.error('Error saving user data: ', error);
             });
 
-        // Clear the form
         setFormData({
             name: '',
             email: '',
@@ -79,7 +84,7 @@ function RegistrationForm() {
             resume: null,
             skills: '',
         });
-        setIsRegistered(false); // Reset registration status
+        setIsRegistered(false);
     };
 
     return (
@@ -95,7 +100,7 @@ function RegistrationForm() {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        disabled={isRegistered} // Disable if already registered
+                        disabled={isRegistered}
                     />
                 </Form.Group>
 
@@ -108,7 +113,7 @@ function RegistrationForm() {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        disabled={isRegistered} // Disable if already registered
+                        disabled={isRegistered}
                     />
                 </Form.Group>
 
@@ -121,7 +126,7 @@ function RegistrationForm() {
                         value={formData.phoneNumber}
                         onChange={handleChange}
                         required
-                        disabled={isRegistered} // Disable if already registered
+                        disabled={isRegistered}
                     />
                 </Form.Group>
 
@@ -134,7 +139,7 @@ function RegistrationForm() {
                         value={formData.degree}
                         onChange={handleChange}
                         required
-                        disabled={isRegistered} // Disable if already registered
+                        disabled={isRegistered}
                     />
                 </Form.Group>
 
@@ -147,7 +152,7 @@ function RegistrationForm() {
                         value={formData.branch}
                         onChange={handleChange}
                         required
-                        disabled={isRegistered} // Disable if already registered
+                        disabled={isRegistered}
                     />
                 </Form.Group>
 
@@ -160,7 +165,7 @@ function RegistrationForm() {
                         value={formData.cgpa}
                         onChange={handleChange}
                         required
-                        disabled={isRegistered} // Disable if already registered
+                        disabled={isRegistered}
                     />
                 </Form.Group>
 
@@ -170,7 +175,7 @@ function RegistrationForm() {
                         type="file"
                         name="resume"
                         onChange={handleChange}
-                        disabled={isRegistered} // Disable if already registered
+                        disabled={isRegistered}
                     />
                 </Form.Group>
 
@@ -183,7 +188,7 @@ function RegistrationForm() {
                         value={formData.skills}
                         onChange={handleChange}
                         required
-                        disabled={isRegistered} // Disable if already registered
+                        disabled={isRegistered}
                     />
                 </Form.Group>
 

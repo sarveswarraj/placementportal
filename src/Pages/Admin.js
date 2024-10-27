@@ -1,10 +1,14 @@
-
+import AdminSidebar from "../Components/AdminSidebar";
+import ManageCompanies from "./ManageCompanies";
 
 function Admin() {
     return (
-        <div>
-            
-        </div>
+      <div className="d-flex">
+      <AdminSidebar />
+      <div className="content p-4 flex-grow-1">
+        <ManageCompanies/>
+      </div>
+    </div>
       );
 }
 

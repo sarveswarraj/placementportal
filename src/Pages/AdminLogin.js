@@ -1,11 +1,10 @@
-// AdminLogin.js
-import './Css/login.css';
-import React, { useState, useEffect } from 'react';
-import { auth, provider, database } from '../firebaseConfig';
-import { signInWithPopup, signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import './Css/login.css'; // Ensure the path is correct
+import React, { useEffect, useState } from 'react';
+import { auth, provider, database } from '../firebaseConfig'; // Adjust the import path if necessary
+import { signInWithPopup, onAuthStateChanged } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { ref, get } from 'firebase/database';
-import { ReactComponent as GoogleIcon } from './Css/google.svg';
+import { ref, get } from 'firebase/database'; // Import required Firebase Database functions
+import { ReactComponent as GoogleIcon } from './Css/google.svg'; // Import your Google icon SVG
 
 const AdminLogin = () => {
     const [email, setEmail] = useState('');
@@ -21,13 +20,16 @@ const AdminLogin = () => {
         }
 
         try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            // Authenticate user with Firebase
+            const userCredential = await auth.signInWithEmailAndPassword(email, password);
             const user = userCredential.user;
 
+            // Check if user exists in the Realtime Database
             const userRef = ref(database, `users/${user.uid}`);
             const snapshot = await get(userRef);
             if (snapshot.exists()) {
-                navigate("/studentreg");
+                console.log('User exists in database:', snapshot.val());
+                navigate("/studentreg"); // Redirect to student registration
             } else {
                 setError('User does not exist in the database.');
             }
@@ -43,9 +45,10 @@ const AdminLogin = () => {
     const handleGoogleSignIn = async () => {
         try {
             const result = await signInWithPopup(auth, provider);
-            const user = result.user;
-            localStorage.setItem('user', JSON.stringify(user.email));
-            navigate('/studentreg');
+            const user = result.user.email;
+            // Store user info in localStorage
+            localStorage.setItem('adminuser', JSON.stringify(user));
+            navigate('/admin'); // Redirect to student registration after Google sign-in
         } catch (error) {
             console.error('Error during sign-in:', error);
         }
@@ -54,18 +57,19 @@ const AdminLogin = () => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             if (currentUser) {
-                localStorage.setItem('user', JSON.stringify(currentUser));
+                // Store user info in localStorage
+                localStorage.setItem('adminuser', JSON.stringify(currentUser));
             } else {
-                localStorage.removeItem('user');
+                localStorage.removeItem('adminuser'); // Remove user info on sign-out
             }
         });
 
-        return () => unsubscribe();
+        return () => unsubscribe(); // Cleanup subscription on unmount
     }, []);
 
     return (
         <div className="login-container">
-            <h2>Login</h2>
+            <h2>Admin Login</h2>
             {error && <p className="error-message">{error}</p>}
             <form onSubmit={handleSubmit} className="login-form">
                 <div className="input-group">
